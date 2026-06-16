@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Thumbnail from '../models/Thumbnail.js';
+import db from '../configs/firebase.js';
 import { GenerateContentConfig, HarmBlockThreshold, HarmCategory } from '@google/genai';
 import ai from '../configs/ai.js';
 import { v2 as cloudinary } from 'cloudinary';
@@ -25,10 +25,11 @@ const colorSchemeDescriptions = {
 
 export const generateThumbnail = async (req: Request, res: Response) => {
     try {
-        const { userId } = req.session;
+        const userId = req.userId; // ← session.userId ki jagah
         const { title, prompt: user_prompt, style, aspect_ratio, color_scheme, text_overlay } = req.body;
 
-        const thumbnail = await Thumbnail.create({
+        // Firestore mein thumbnail create karo
+        const thumbnailRef = await db.collection('thumbnails').add({
             userId,
             title,
             prompt_used: user_prompt,
@@ -38,6 +39,9 @@ export const generateThumbnail = async (req: Request, res: Response) => {
             color_scheme,
             text_overlay,
             isGenerating: true,
+            image_url: '',
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
 
         const model = 'gemini-3-pro-image-preview';
@@ -60,31 +64,21 @@ export const generateThumbnail = async (req: Request, res: Response) => {
         };
 
         let prompt = `Create a ${stylePrompts[style as keyof typeof stylePrompts]} for: "${title}"`;
+        if (color_scheme) prompt += `Use a ${colorSchemeDescriptions[color_scheme as keyof typeof colorSchemeDescriptions]} color scheme.`;
+        if (user_prompt) prompt += `Additional details: ${user_prompt}. `;
+        prompt += `The thumbnail should be ${aspect_ratio}, visually stunning, and designed to maximize click-through rate.`;
 
-        if (color_scheme) {
-            prompt += `Use a ${colorSchemeDescriptions[color_scheme as keyof typeof colorSchemeDescriptions]} color scheme.`;
-        }
-
-        if (user_prompt) {
-            prompt += `Additional details: ${user_prompt}. `;
-        }
-
-        prompt += `The thumbnail should be ${aspect_ratio}, visually stunning, and designed to maximize click-through rate. Make it bold, professional, and impossible to ignore.`;
-
-        // Generate the image using the ai model
         const response: any = await ai.models.generateContent({
             model,
             contents: [prompt],
             config: generationConfig,
         });
 
-        // Check if the response is valid
         if (!response?.candidates?.[0]?.content?.parts) {
             throw new Error('Unexpected response');
         }
 
         const parts = response.candidates[0].content.parts;
-
         let finalBuffer: Buffer | null = null;
 
         for (const part of parts) {
@@ -93,35 +87,42 @@ export const generateThumbnail = async (req: Request, res: Response) => {
             }
         }
 
-        if (!finalBuffer) {
-            throw new Error('Failed to generate image');
-        }
+        if (!finalBuffer) throw new Error('Failed to generate image');
 
         const base64Image = `data:image/png;base64,${finalBuffer.toString('base64')}`;
+        const uploadResult = await cloudinary.uploader.upload(base64Image, { resource_type: 'image' });
 
-        const uploadResult = await cloudinary.uploader.upload(base64Image, {
-            resource_type: 'image',
+        // Firestore update karo
+        await thumbnailRef.update({
+            image_url: uploadResult.secure_url,
+            isGenerating: false,
+            updatedAt: new Date(),
         });
 
-        thumbnail.image_url = uploadResult.secure_url;
-        thumbnail.isGenerating = false;
-        await thumbnail.save();
-
-        res.json({ message: 'Thumbnail Generated', thumbnail });
+        const updatedDoc = await thumbnailRef.get();
+        res.json({
+            message: 'Thumbnail Generated',
+            thumbnail: { _id: thumbnailRef.id, ...updatedDoc.data() },
+        });
     } catch (error: any) {
         console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
 
-// Controllers For Thumbnail Deletion
 export const deleteThumbnail = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { userId } = req.session;
+        const userId = req.userId; // ← session ki jagah
 
-        await Thumbnail.findByIdAndDelete({ _id: id, userId });
+        const thumbnailRef = db.collection('thumbnails').doc(id);
+        const thumbnailDoc = await thumbnailRef.get();
 
+        if (!thumbnailDoc.exists || thumbnailDoc.data()?.userId !== userId) {
+            return res.status(404).json({ message: 'Thumbnail not found' });
+        }
+
+        await thumbnailRef.delete();
         res.json({ message: 'Thumbnail deleted successfully' });
     } catch (error: any) {
         console.log(error);

@@ -1,56 +1,41 @@
 import express, { Request, Response } from 'express';
-import cors from 'cors'
-import 'dotenv/config'
-import connectDB from './configs/db.js';
-import session from 'express-session'
-import MongoStore from 'connect-mongo'
+import cors from 'cors';
+import 'dotenv/config';
+import './configs/firebase.js';
 import AuthRouter from './routes/AuthRoutes.js';
 import ThumbnailRouter from './routes/ThumbnailRoutes.js';
 import UserRouter from './routes/UserRoutes.js';
-
-declare module 'express-session' {
-    interface SessionData {
-        isLoggedIn: boolean;
-        userId: string
-    }
-}
-
-await connectDB()
 
 const app = express();
 
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:3000'],
-    credentials: true
-}))
+    credentials: true,
+}));
 
-app.set('trust proxy', 1)
+app.set('trust proxy', 1);
+app.use(express.json());
 
-app.use(session({
-    secret: process.env.SESSION_SECRET as string,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        path: '/'
-    }, 
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI as string,
-        collectionName: 'sessions'
-    })
-}))
-
-app.use(express.json())
+// Cookie manually parse karo
+app.use((req, res, next) => {
+    const cookieHeader = req.headers.cookie;
+    req.cookies = {};
+    if (cookieHeader) {
+        cookieHeader.split(';').forEach(cookie => {
+            const [key, ...val] = cookie.trim().split('=');
+            req.cookies[key.trim()] = decodeURIComponent(val.join('='));
+        });
+    }
+    next();
+});
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
-app.use('/api/auth', AuthRouter)
-app.use('/api/thumbnail', ThumbnailRouter)
-app.use('/api/user', UserRouter)
+
+app.use('/api/auth', AuthRouter);
+app.use('/api/thumbnail', ThumbnailRouter);
+app.use('/api/user', UserRouter);
 
 const port = process.env.PORT || 3000;
 

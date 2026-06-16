@@ -1,7 +1,14 @@
 {
   "dependencies": {
     "@react-oauth/google": "^0.13.5",
+    "cookie-parser": "^1.4.7",
     "D": "^1.0.0",
-    "google-auth-library": "^10.7.0"
+    "firebase-admin": "^10.3.0",
+    "google-auth-library": "^10.7.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/jsonwebtoken": "^9.0.10"
   }
 }

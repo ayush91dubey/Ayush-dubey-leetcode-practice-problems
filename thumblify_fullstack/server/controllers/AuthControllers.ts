@@ -1,36 +1,54 @@
 import { Request, Response } from 'express';
-import User from '../models/User.js';
+import db from '../configs/firebase.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-// Controllers For User Registration
+// Helper: JWT cookie set karna
+const setTokenCookie = (res: Response, userId: string) => {
+    const token = jwt.sign(
+        { userId },
+        process.env.JWT_SECRET as string,
+        { expiresIn: '7d' }
+    );
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        path: '/',
+    });
+};
+
+// Register
 export const registerUser = async (req: Request, res: Response) => {
     try {
         const { name, email, password } = req.body;
 
-        // find user by email
-        const user = await User.findOne({ email });
-        if (user) {
+        // Email se user dhundo
+        const existingUsers = await db.collection('users')
+            .where('email', '==', email)
+            .get();
+
+        if (!existingUsers.empty) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Encrypt the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = new User({ name, email, password: hashedPassword });
-        await newUser.save();
+        const newUserRef = await db.collection('users').add({
+            name,
+            email,
+            password: hashedPassword,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
 
-        // setting user data in session
-        req.session.isLoggedIn = true;
-        req.session.userId = newUser._id;
+        setTokenCookie(res, newUserRef.id);
 
         return res.json({
             message: 'Account created successfully',
-            user: {
-                _id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-            },
+            user: { _id: newUserRef.id, name, email },
         });
     } catch (error: any) {
         console.log(error);
@@ -38,31 +56,35 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 };
 
-// Controllers For User Login
+// Login
 export const loginUser = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
 
-        // find user by email
-        const user = await User.findOne({ email });
-        if (!user) {
+        const userSnapshot = await db.collection('users')
+            .where('email', '==', email)
+            .get();
+
+        if (userSnapshot.empty) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        const userDoc = userSnapshot.docs[0];
+        const userData = userDoc.data();
+
+        const isPasswordCorrect = await bcrypt.compare(password, userData.password);
         if (!isPasswordCorrect) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        // setting user data in session
-        req.session.isLoggedIn = true;
-        req.session.userId = user._id;
+        setTokenCookie(res, userDoc.id);
 
         return res.json({
             message: 'Login successful',
             user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
+                _id: userDoc.id,
+                name: userData.name,
+                email: userData.email,
             },
         });
     } catch (error: any) {
@@ -71,29 +93,24 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 };
 
-// Controllers For User Logout
+// Logout
 export const logoutUser = async (req: Request, res: Response) => {
-    req.session.destroy((error: any) => {
-        if (error) {
-            console.log(error);
-            return res.status(500).json({ message: error.message });
-        }
-    });
+    res.clearCookie('token', { path: '/' });
     return res.json({ message: 'Logout successful' });
 };
 
-// Controllers For User Verify
+// Verify
 export const verifyUser = async (req: Request, res: Response) => {
     try {
-        const { userId } = req.session;
+        const userDoc = await db.collection('users').doc(req.userId as string).get();
 
-        const user = await User.findById(userId).select('-password');
-
-        if (!user) {
+        if (!userDoc.exists) {
             return res.status(400).json({ message: 'Invalid user' });
         }
 
-        return res.json({ user });
+        const { password, ...userData } = userDoc.data()!;
+
+        return res.json({ user: { _id: userDoc.id, ...userData } });
     } catch (error: any) {
         console.log(error);
         res.status(500).json({ message: error.message });
