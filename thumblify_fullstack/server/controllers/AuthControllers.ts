@@ -12,8 +12,8 @@ const setTokenCookie = (res: Response, userId: string) => {
     );
     res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: false,
+        sameSite: 'lax',
         maxAge: 1000 * 60 * 60 * 24 * 7,
         path: '/',
     });
@@ -22,9 +22,13 @@ const setTokenCookie = (res: Response, userId: string) => {
 // Register
 export const registerUser = async (req: Request, res: Response) => {
     try {
+        console.log('Register request received:', req.body);
         const { name, email, password } = req.body;
 
-        // Email se user dhundo
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
         const existingUsers = await db.collection('users')
             .where('email', '==', email)
             .get();
@@ -51,7 +55,7 @@ export const registerUser = async (req: Request, res: Response) => {
             user: { _id: newUserRef.id, name, email },
         });
     } catch (error: any) {
-        console.log(error);
+        console.error('Register error:', error);
         res.status(500).json({ message: error.message });
     }
 };
