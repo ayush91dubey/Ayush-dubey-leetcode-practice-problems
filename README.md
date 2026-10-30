@@ -7,6 +7,7 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0001-two-sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0001-two-sum) |
+| [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
 ## Hash Table
 |  |
 | ------- |
@@ -23,4 +24,12 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0110-balanced-binary-tree](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0110-balanced-binary-tree) |
+## Two Pointers
+|  |
+| ------- |
+| [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
+## Sorting
+|  |
+| ------- |
+| [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
 <!---LeetCode Topics End-->
