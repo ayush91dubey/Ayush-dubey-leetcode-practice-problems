@@ -20,10 +20,12 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0110-balanced-binary-tree](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0110-balanced-binary-tree) |
+| [3558-number-of-ways-to-assign-edge-weights-i](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/3558-number-of-ways-to-assign-edge-weights-i) |
 ## Depth-First Search
 |  |
 | ------- |
 | [0110-balanced-binary-tree](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0110-balanced-binary-tree) |
+| [3558-number-of-ways-to-assign-edge-weights-i](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/3558-number-of-ways-to-assign-edge-weights-i) |
 ## Binary Tree
 |  |
 | ------- |
@@ -52,4 +54,8 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [1882-process-tasks-using-servers](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1882-process-tasks-using-servers) |
+## Math
+|  |
+| ------- |
+| [3558-number-of-ways-to-assign-edge-weights-i](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/3558-number-of-ways-to-assign-edge-weights-i) |
 <!---LeetCode Topics End-->
