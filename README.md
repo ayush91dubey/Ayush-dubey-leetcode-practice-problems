@@ -9,6 +9,7 @@ HII ,Here you get the best solution of leetcode  question
 | [0001-two-sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0001-two-sum) |
 | [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
 | [0041-first-missing-positive](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0041-first-missing-positive) |
+| [1882-process-tasks-using-servers](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1882-process-tasks-using-servers) |
 ## Hash Table
 |  |
 | ------- |
@@ -47,4 +48,8 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
+## Heap (Priority Queue)
+|  |
+| ------- |
+| [1882-process-tasks-using-servers](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1882-process-tasks-using-servers) |
 <!---LeetCode Topics End-->
