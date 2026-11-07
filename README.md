@@ -74,6 +74,7 @@ HII ,Here you get the best solution of leetcode  question
 ## String
 |  |
 | ------- |
+| [0006-zigzag-conversion](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0006-zigzag-conversion) |
 | [3838-weighted-word-mapping](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/3838-weighted-word-mapping) |
 ## Simulation
 |  |
