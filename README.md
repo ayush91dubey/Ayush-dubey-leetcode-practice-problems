@@ -14,6 +14,7 @@ HII ,Here you get the best solution of leetcode  question
 | ------- |
 | [0001-two-sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0001-two-sum) |
 | [0041-first-missing-positive](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0041-first-missing-positive) |
+| [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
 ## Tree
 |  |
 | ------- |
@@ -34,4 +35,16 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
+## Stack
+|  |
+| ------- |
+| [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
+## Design
+|  |
+| ------- |
+| [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
+## Ordered Set
+|  |
+| ------- |
+| [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
 <!---LeetCode Topics End-->
