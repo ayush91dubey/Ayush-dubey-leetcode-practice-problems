@@ -40,6 +40,7 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
+| [2130-maximum-twin-sum-of-a-linked-list](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/2130-maximum-twin-sum-of-a-linked-list) |
 ## Sorting
 |  |
 | ------- |
@@ -48,6 +49,7 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0895-maximum-frequency-stack](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0895-maximum-frequency-stack) |
+| [2130-maximum-twin-sum-of-a-linked-list](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/2130-maximum-twin-sum-of-a-linked-list) |
 ## Design
 |  |
 | ------- |
@@ -99,4 +101,8 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [1267-count-servers-that-communicate](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1267-count-servers-that-communicate) |
+## Linked List
+|  |
+| ------- |
+| [2130-maximum-twin-sum-of-a-linked-list](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/2130-maximum-twin-sum-of-a-linked-list) |
 <!---LeetCode Topics End-->
