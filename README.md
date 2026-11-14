@@ -8,6 +8,7 @@ HII ,Here you get the best solution of leetcode  question
 | ------- |
 | [0001-two-sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0001-two-sum) |
 | [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
+| [0033-search-in-rotated-sorted-array](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0033-search-in-rotated-sorted-array) |
 | [0041-first-missing-positive](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0041-first-missing-positive) |
 | [1267-count-servers-that-communicate](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1267-count-servers-that-communicate) |
 | [1882-process-tasks-using-servers](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1882-process-tasks-using-servers) |
@@ -105,4 +106,8 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [2130-maximum-twin-sum-of-a-linked-list](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/2130-maximum-twin-sum-of-a-linked-list) |
+## Binary Search
+|  |
+| ------- |
+| [0033-search-in-rotated-sorted-array](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0033-search-in-rotated-sorted-array) |
 <!---LeetCode Topics End-->
