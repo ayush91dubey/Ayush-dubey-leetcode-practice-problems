@@ -10,6 +10,7 @@ HII ,Here you get the best solution of leetcode  question
 | [0018-4sum](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0018-4sum) |
 | [0033-search-in-rotated-sorted-array](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0033-search-in-rotated-sorted-array) |
 | [0041-first-missing-positive](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0041-first-missing-positive) |
+| [0051-n-queens](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0051-n-queens) |
 | [1267-count-servers-that-communicate](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1267-count-servers-that-communicate) |
 | [1882-process-tasks-using-servers](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/1882-process-tasks-using-servers) |
 | [3559-number-of-ways-to-assign-edge-weights-ii](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/3559-number-of-ways-to-assign-edge-weights-ii) |
@@ -110,4 +111,12 @@ HII ,Here you get the best solution of leetcode  question
 |  |
 | ------- |
 | [0033-search-in-rotated-sorted-array](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0033-search-in-rotated-sorted-array) |
+## Backtracking
+|  |
+| ------- |
+| [0051-n-queens](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0051-n-queens) |
+## Algorithm X
+|  |
+| ------- |
+| [0051-n-queens](https://github.com/ayush91dubey/Ayush-dubey-leetcode-practice-problems/tree/master/0051-n-queens) |
 <!---LeetCode Topics End-->
